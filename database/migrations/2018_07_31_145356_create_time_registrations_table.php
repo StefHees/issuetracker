@@ -15,6 +15,10 @@ class CreateTimeRegistrationsTable extends Migration
     {
         Schema::create('time_registrations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('task_id');
+            $table->integer('time_in_minutes');
+            $table->string('remarks');
             $table->timestamps();
         });
     }
