@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTimeRegistrationsTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateTimeRegistrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('time_registrations', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('issue_id');
             $table->integer('user_id');
-            $table->integer('task_id');
-            $table->integer('time_in_minutes');
-            $table->string('remarks');
+            $table->integer('status_id');
+            $table->integer('estimated_time_minutes');
+            $table->integer('percentage_finished');
+            $table->string('remarks'); //attachments arranged in PHP/JS code, safe to filesystem not DB
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateTimeRegistrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('time_registrations');
+        Schema::dropIfExists('tasks');
     }
 }
