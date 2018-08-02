@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration
+class CreateTasksTableOld extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,9 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('issue_id');
-            $table->integer('user_id');
-            $table->integer('status_id');
+            $table->unsignedInteger('issue_id')->nullable();
+            // $table->unsignedInteger('user_id')->nullable(); // not used anymore: realtion through task_id in task_user table
+            $table->unsignedInteger('status_id')->nullable();
             $table->integer('estimated_time_minutes');
             $table->integer('percentage_finished');
             $table->string('remarks'); //attachments arranged in PHP/JS code, safe to filesystem not DB

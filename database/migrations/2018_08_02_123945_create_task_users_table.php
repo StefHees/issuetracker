@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTimeRegistrationsTable extends Migration
+class CreateTaskUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTimeRegistrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('time_registrations', function (Blueprint $table) {
+        Schema::create('task_users', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();;
             $table->unsignedInteger('task_id')->nullable();;
-            $table->integer('time_in_minutes')->nullable();;
-            $table->string('remarks');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateTimeRegistrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('time_registrations');
+        Schema::dropIfExists('task_users');
     }
 }
