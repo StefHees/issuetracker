@@ -30,7 +30,9 @@
             </nav>
             <main id="right-panel">
                 <div class="py-4">
-                    @yield('content')
+
+                        @yield('content')
+                    </div>
                 </div>
             </main>
         </div>

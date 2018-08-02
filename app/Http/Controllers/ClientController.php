@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -15,6 +15,8 @@ class ClientController extends Controller
     public function index()
     {
         //
+        $clients = Client::all();
+        return view('client.index', ['clients' => $clients]);
     }
 
     /**
@@ -24,7 +26,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('client.create');
     }
 
     /**
@@ -35,51 +38,74 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'phone_number' => 'required',
+        ]);
+
+        $attributes = $request->all();
+
+        Client::create($attributes);
+
+        return redirect()->route('clients.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function show(Client $client)
     {
-        //
+        return redirect()->route('clients.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function edit(Client $client)
     {
-        //
+        return view('client.edit', ['client' => $client]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'phone_number' => 'required',
+        ]);
+
+        $attributes = $request->all();
+
+        $client->update($attributes);
+
+        return redirect()->route('clients.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect('client.index');
     }
 }
