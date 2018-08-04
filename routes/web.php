@@ -23,3 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resources([
     'clients' => 'ClientController',
 ]);
+
+Route::resources([
+    'statuses' => 'StatusController',
+]);
