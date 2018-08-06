@@ -13,11 +13,11 @@ class AlterTasksTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('tasks')) {
+        /*if (Schema::hasTable('tasks')) {
             Schema::table('tasks', function (Blueprint $table) {
                 $table->foreign('comment_id')->references('id')->on('comments');
             });
-        }
+        }*/
     }
 
     /**
@@ -27,9 +27,9 @@ class AlterTasksTable extends Migration
      */
     public function down()
     {
-        Schema::table('issues', function (Blueprint $table) {
+        /*Schema::table('issues', function (Blueprint $table) {
             $table->dropForeign('comment_id');
             $table->dropColumn('comment_id');
-        });
+        });*/
     }
 }

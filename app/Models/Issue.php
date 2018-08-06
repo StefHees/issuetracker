@@ -12,9 +12,9 @@ class Issue extends Model
         'title', 'type', 'description', 'client_id'
     ];
 
-    /*public function users(){
-        return $this->belongsToMany(User::class);
-    }*/
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
 
     public function client()
     {

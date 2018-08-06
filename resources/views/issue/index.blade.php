@@ -29,7 +29,7 @@
             <p class="card-text">Teammembers: @foreach($issue->users as $user){{ $user->name }}, @endforeach</p>
             <p class="card-text">Client: {{ $issue->client->name }}</p>
             <p class="card-text">{{$issue->description}}</p>
-            <a href="#" class="btn btn-primary">Details</a>
+            <a href="{{ route('issues.show', $issue) }}" class="btn btn-primary">Details</a>
         </div>
     </div>
     @endforeach
