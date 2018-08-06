@@ -32,3 +32,8 @@ Route::resources([
 Route::resources([
     'statuses' => 'StatusController',
 ]);
+
+Route::resources([
+    'issues' => 'IssueController',
+
+]);
