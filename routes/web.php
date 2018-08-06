@@ -33,6 +33,6 @@ Route::resources([
 ]);
 
 Route::resources([
-    'issues' => 'IssueController',
+    'issuesv2' => 'IssueV2Controller',
 
 ]);
