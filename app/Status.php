@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Task;
 
 class Status extends Model
 {
@@ -13,6 +14,6 @@ class Status extends Model
 
     public function tasks()
     {
-        return $this->hasOne(Task::class);
+        return $this->hasmany(Task::class);
     }
 }

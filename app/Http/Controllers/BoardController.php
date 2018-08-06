@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Status;
 
 class BoardController extends Controller
 {
     public function overview(Request $request)
     {
-        /*$status = Status::all();
-        return view();*/
+        $statuses = Status::all();
+        return view('board.overview', ['statuses' => $statuses]);
     }
 }
