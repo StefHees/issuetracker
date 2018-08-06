@@ -32,3 +32,7 @@ Route::resources([
 Route::resources([
     'statuses' => 'StatusController',
 ]);
+
+Route::resources([
+    'time_registrations' => 'TimeRegistrationController',
+]);
