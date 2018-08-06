@@ -20,6 +20,9 @@
         <a class="nav-link" href="{{ route('statuses.index') }}">Statuses</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('time_registrations.index') }}">Time registrations</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="">Disabled</a>
     </li>
 </ul>
