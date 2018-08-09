@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Status;
+use App\Models\Status;
 
 class Task extends Model
 {

@@ -18,9 +18,9 @@ Route::get('/', function () {
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/board', 'BoardController@overview')->name('board');
+Route::get('/', 'BoardController@dashboard')->name('board');
+Route::get('/overview', 'BoardController@tree')->name('tree');
 
 Route::resources([
     'clients' => 'ClientController',

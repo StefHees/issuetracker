@@ -21,28 +21,29 @@
 </head>
 <body>
     <div id="app">
-        <div id="main-container">
-            <div id="main-panel">
+        <div class="row">
+            <div class="col-2 sidebar">
+                <div id="main-panel">
 
-            </div>
-            <nav id="left-panel">
-                @include('etc.navbar')
-
-            </nav>
-            <main id="right-panel">
-                <div class="py-4">
-                    <div class="col-10 m-auto">
-                        @if(Session::has('status'))
-                            <p class="alert {{ Session::get('class', 'alert-info') }}">{{ Session::get('status') }}</p>
-                        @endif
-                    </div>
-
-                    @yield('content')
                 </div>
+                <nav id="left-panel">
+                    @include('etc.navbar')
+                </nav>
+            </div>
+            <main class="col-10">
+                <div class="py-4">
+                    @if(Session::has('status'))
+                        <p class="alert {{ Session::get('class', 'alert-info') }}">{{ Session::get('status') }}</p>
+                    @endif
+                </div>
+                @yield('content')
             </main>
         </div>
 
-
     </div>
+
+
+        </div>
+
 </body>
 </html>

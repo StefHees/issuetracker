@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Status;
+use App\Models\Issue;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -25,7 +28,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $statuses = Status::all();
+        $issues = Issue::all();
+        return view('task.create', ['statuses' => $statuses, 'issues' => $issues]);
     }
 
     /**
@@ -36,7 +41,24 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'estimation' => 'required',
+            'description' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'priority' => 'required',
+            'issue_id' => 'required',
+            'status_id' => 'required',
+        ]);
+        $attributes = $request->all();
+
+        Task::create($attributes);
+
+        Session::flash('status', 'Task was successfully added!');
+        Session::flash('class', 'alert-success');
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -47,18 +69,21 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        return view('task.edit', ['task' => $task]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
     public function edit(Task $task)
     {
-        //
+        $statuses = Status::all();
+        $issues = Issue::all();
+        return view('task.edit', ['task' => $task, 'statuses' => $statuses, 'issues' => $issues]);
     }
 
     /**
@@ -70,7 +95,24 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'estimation' => 'required',
+            'description' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'priority' => 'required',
+            'issue_id' => 'required',
+            'status_id' => 'required',
+        ]);
+        $attributes = $request->all();
+
+        $task->update($attributes);
+
+        Session::flash('status', 'Task was successfully edited!');
+        Session::flash('class', 'alert-success');
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -81,6 +123,10 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        Session::flash('status', 'Task was successfully destroyed!');
+        Session::flash('class', 'alert-warning');
+
+        return redirect()->route('tasks.index');
     }
 }

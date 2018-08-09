@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <div class="m-auto col-10 mt-5">
+    <th class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
-            <a class="btn btn-success text-white" href="{{ route('clients.create') }}"><i class="fas fa-plus"></i> Add Client</a>
+            <a class="btn btn-success text-white" href="{{ route('tasks.create') }}"><i class="fas fa-plus"></i> Add Task</a>
         </div>
         @if($tasks !== null)
             <table class="table table-striped table-dark">
@@ -19,6 +19,7 @@
                     <th scope="col">Time Estimation</th>
                     <th scope="col">Status</th>
                     <th scope="col">Issue</th>
+                    <th scope="col">Options</th>
 
                 </tr>
                 </thead>
@@ -34,6 +35,15 @@
                         <td>{{ $task->estimation }}</td>
                         <td>{{ $task->status->status_name }}</td>
                         <td>{{ $task->issue->title }}</td>
+                        <th>
+                                <a href="{{ route('tasks.edit', [$task]) }}"  class="btn btn-sm btn-primary mr-1">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                {!! \Form::open(['route' => ['tasks.destroy', $task], 'method' => 'delete']) !!}
+                                {!! \Form::button('<i class="fas fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger']) !!}
+                                {!! \Form::close() !!}
+
+                        </th>
 
                     </tr>
                 @endforeach

@@ -5,8 +5,14 @@
             <a class="btn btn-primary text-white m-1" href="{{ route('register') }}">{{ __('Register') }}</a>
         </div>
     @else
-        <h3>{{ Auth::user()->name }}</h3>
-        <a class="btn btn-primary text-white" href="{{ route('logout') }}">logout</a>
+        <div class="row justify-content-center">
+            <img src="{{ Auth::user()->image_path }}" style="width:75px; height:75px; margin:5px;">
+        </div>
+        <h5 class="text-center m-0">{{ Auth::user()->name }}</h5>
+        <p class="text-center text-muted m-0">{{ Auth::user()->role }}</p>
+        <div class="row justify-content-center">
+            <a class="btn btn-primary text-white" href="{{ route('logout') }}">logout</a>
+        </div>
     @endguest
 </div>
 <ul class="nav flex-column">

@@ -4,10 +4,7 @@
   padding:0;
 }
 
-#main-container{
-  display:flex;
-  height:100%;
-}
+
 
 #main-panel{
   width:60px;
@@ -15,12 +12,6 @@
   background-color:$primary;
 }
 
-#left-panel{
-  width:300px;
-  height:100%;
-
-
-}
 #right-panel{
   background-color: #ffffff;
   width:100%;
@@ -35,4 +26,12 @@
 .user-nav{
   height:200px;
   width:100%;
+}
+
+.sidebar{
+  display:flex;
+}
+
+.bg-gray{
+  background-color: #f7f7f7;
 }
