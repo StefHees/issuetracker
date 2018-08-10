@@ -9,13 +9,8 @@ class Task extends Model
 {
     protected $fillable = [
         'title', 'description', 'progress', 'start_date', 'end_date',
-        'estimation' , 'priority', 'issue_id', 'status_id', 'task_id',
+        'estimation' , 'priority', 'issue_id', 'status_id', 'parent_id',
     ];
-
-    public function issue()
-    {
-        return $this->belongsTo(Issue::class);
-    }
 
     public function status()
     {
@@ -24,7 +19,12 @@ class Task extends Model
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class);
+        return $this->hasMany(Task::class,'id','reply_id');
+    }
+
+    public function types()
+    {
+        return $this->belongsToMany(Type::class);
     }
 
 }
