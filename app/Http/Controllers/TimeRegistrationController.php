@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\TimeRegistrations;
+use App\User;
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TimeRegistrationController extends Controller
 {
@@ -25,7 +28,9 @@ class TimeRegistrationController extends Controller
      */
     public function create()
     {
-        //
+        $Users = User::orderBy('name', 'asc')->pluck('name', 'id')->toArray();
+        $Tasks = Task::orderBy('remarks', 'asc')->pluck('remarks', 'id')->toArray();
+        return view('timeRegistration.create', ['Users' => $Users], ['Tasks' => $Tasks]);
     }
 
     /**
@@ -36,7 +41,18 @@ class TimeRegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'task_id' => 'required',
+            'time_in_minutes' => 'required',
+        ]);
+
+        $attributes = $request->all();
+
+        TimeRegistrations::create($attributes);
+        Session::flash('status', 'Registration was successfully added!');
+        Session::flash('class', 'alert-success');
+        return redirect()->route('time_registrations.index');
     }
 
     /**
@@ -56,9 +72,11 @@ class TimeRegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TimeRegistrations $TimeRegistration)
     {
-        //
+        $Users = User::orderBy('name', 'asc')->pluck('name', 'id')->toArray();
+        $Tasks = Task::orderBy('remarks', 'asc')->pluck('remarks', 'id')->toArray();
+        return view('timeRegistration.edit', ['TimeRegistration' => $TimeRegistration, 'Users' => $Users, 'Tasks' => $Tasks]);
     }
 
     /**
@@ -68,9 +86,20 @@ class TimeRegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TimeRegistrations $TimeRegistration)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'task_id' => 'required',
+            'time_in_minutes' => 'required',
+        ]);
+
+        $attributes = $request->all();
+
+        $TimeRegistration->update($attributes);
+        Session::flash('status', $TimeRegistration->remarks.' has been editted!');
+        Session::flash('class', 'alert-success');
+        return redirect()->route('time_registrations.index');
     }
 
     /**
@@ -79,8 +108,11 @@ class TimeRegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TimeRegistrations $TimeRegistration)
     {
-        //
+        $TimeRegistration->delete();
+        Session::flash('status', $TimeRegistration->remarks.' has been deleted!');
+        Session::flash('class', 'alert-success');
+        return redirect()->route('time_registrations.index');
     }
 }

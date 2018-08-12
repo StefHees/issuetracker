@@ -4,39 +4,34 @@
 
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
-            <a class="btn btn-success text-white" href="{{ route('time_registrations.create') }}"><i class="fas fa-plus"></i> Add Status</a>
+            <a class="btn btn-success text-white" href="{{ route('time_registrations.create') }}"><i class="fas fa-plus"></i> Add registration</a>
         </div>
         @if($TimeRegistrations !== null)
             <table class="table table-striped table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Color (hex)</th>
-                    <th scope="col">Order <br>
-                    (as appearing on Dashboard)</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Time (minutes) (hex)</th>
+                    <th scope="col">Description </th>
                 </tr>
                 </thead>
                 <tbody>
+                {{--{{dd($TimeRegistrations->has('Task'))}}--}}
+                {{--{{ $temp = $TimeRegistrations->find(1) }}--}}
+                {{--{{dd($temp->user)}}--}}
                 @foreach($TimeRegistrations as $registration)
-
-                    {{--$table->increments('id');--}}
-                    {{--$table->unsignedInteger('user_id')->nullable();;--}}
-                    {{--$table->unsignedInteger('task_id')->nullable();;--}}
-                    {{--$table->integer('time_in_minutes')->nullable();;--}}
-                    {{--$table->string('remarks');--}}
-                    {{--$table->timestamps();                    --}}
-
                     <tr>
                         <th scope="row">{{ $registration->id }}</th>
-                        <td>{{ $registration->status_name }}</td>
-                        <td>{{ $registration->status_description }}</td>
-                        <td>{{ $registration->dashboard_color_hex }}</td>
-                        <td>{{ $registration->dashboard_order }}</td>
+                        {{--<td>{{ dd($registration) }}</td>--}}
+                        <td>{{ $registration->task->remarks }}</td>
+                        <td>{{ $registration->user->name }}</td>
+                        <td>{{ $registration->time_in_minutes }}</td>
+                        <td>{{ $registration->remarks }}</td>
                         <td>
                             <div class="row align-content-between">
-                                <a href="{{ route('statuses.edit', [$registration]) }}"  class="btn btn-sm btn-primary m-1">
+                                <a href="{{ route('time_registrations.edit', [$registration]) }}"  class="btn btn-sm btn-primary m-1">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 {!! \Form::open(['route' => ['time_registrations.destroy', $registration], 'method' => 'delete']) !!}
@@ -50,7 +45,7 @@
                 </tbody>
             </table>
         @else
-            <h3>You have no statuses! :(</h3>
+            <h3>You have no registrations! :(</h3>
         @endif
 
 

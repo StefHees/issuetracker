@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class TimeRegistrations extends Model
@@ -12,6 +13,12 @@ class TimeRegistrations extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        //return $this->belongsTo(User::class, user_id);
+        return $this->belongsTo(User::class);
+    }
+
+    public function task(){
+        //return $this->belongsTo(Task::class, task_id);
+        return $this->belongsTo(Task::class);
     }
 }
