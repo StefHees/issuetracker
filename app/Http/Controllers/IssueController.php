@@ -54,7 +54,7 @@ class IssueController extends Controller
 
         $issue = Issue::create($attributes);
 
-        foreach($request->get('users') as $user){
+        foreach($request->get('users', []) as $user){
             $issue->users()->attach($user);
         }
 
@@ -109,7 +109,7 @@ class IssueController extends Controller
         $issue->update($attributes);
 
         $issue->users()->detach();
-        foreach($request->get('users') as $user){
+        foreach($request->get('users', []) as $user){
             $issue->users()->attach($user);
         }
 
