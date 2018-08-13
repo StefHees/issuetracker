@@ -25,10 +25,7 @@ Route::get('/overview', 'BoardController@tree')->name('tree');
 Route::resources([
     'clients' => 'ClientController',
     'tasks' => 'TaskController',
-]);
-
-Route::resources([
-    'issues' => 'IssueController',
+    'types' => 'TypeController',
 ]);
 
 Route::resources([

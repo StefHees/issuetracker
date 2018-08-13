@@ -12,6 +12,8 @@ class Issue extends Model
         'title', 'type', 'description', 'client_id'
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
     public function tasks(){
         return $this->hasMany(Task::class);
     }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\Status;
-use App\Models\Issue;
+use App\Models\Client;
+use App\Models\Type;
+use App\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -17,7 +19,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = Task::all();
+        $task = Task::all()->where('task_id', '=', null);
         return view('task.index', ['tasks' => $task]);
     }
 
@@ -29,8 +31,11 @@ class TaskController extends Controller
     public function create()
     {
         $statuses = Status::all();
-        $issues = Issue::all();
-        return view('task.create', ['statuses' => $statuses, 'issues' => $issues]);
+        $clients = Client::all();
+        $users = User::all();
+        $tasks = Task::all();
+        $types = Type::all();
+        return view('task.create', ['statuses' => $statuses, 'clients' => $clients, 'users' => $users, 'tasks' => $tasks, 'types' => $types]);
     }
 
     /**
@@ -48,9 +53,11 @@ class TaskController extends Controller
             'start_date' => 'required',
             'end_date' => 'required',
             'priority' => 'required',
-            'issue_id' => 'required',
             'status_id' => 'required',
+            'type_id' => 'required',
+            'client_id' => 'required',
         ]);
+
         $attributes = $request->all();
 
         Task::create($attributes);

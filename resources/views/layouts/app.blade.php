@@ -21,15 +21,17 @@
 </head>
 <body>
     <div id="app">
+        <div class="wrapper container-fluid" style="padding-left:0;">
         <div class="row">
             <div class="col-2 sidebar">
                 <div id="main-panel">
 
                 </div>
-                <nav id="left-panel">
+                <nav id="left-panel" class="bg-gray">
                     @include('etc.navbar')
                 </nav>
             </div>
+
             <main class="col-10">
                 <div class="py-4">
                     @if(Session::has('status'))
@@ -39,11 +41,10 @@
                 @yield('content')
             </main>
         </div>
+        </div>
 
     </div>
 
-
-        </div>
 
 </body>
 </html>

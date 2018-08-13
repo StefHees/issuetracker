@@ -43,10 +43,10 @@ class TypeController extends Controller
 
         $attributes = $request->all();
 
-        Status::create($attributes);
+        Type::create($attributes);
         Session::flash('status', 'Type was successfully added!');
         Session::flash('class', 'alert-success');
-        return redirect()->route('type.index');
+        return redirect()->route('types.index');
     }
 
     /**
@@ -63,7 +63,7 @@ class TypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
     public function edit(Type $type)
@@ -75,7 +75,7 @@ class TypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Type $type)
@@ -87,15 +87,16 @@ class TypeController extends Controller
         $attributes = $request->all();
 
         $type->update($attributes);
+
         Session::flash('status', 'Type has been editted!');
         Session::flash('class', 'alert-success');
-        return redirect()->route('type.index');
+        return redirect()->route('types.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
     public function destroy(Type $type)
@@ -103,6 +104,6 @@ class TypeController extends Controller
         $type->delete();
         Session::flash('status', 'Type has been deleted!');
         Session::flash('class', 'alert-danger');
-        return redirect()->route('type.index');
+        return redirect()->route('types.index');
     }
 }

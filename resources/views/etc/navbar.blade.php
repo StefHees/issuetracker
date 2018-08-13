@@ -17,7 +17,10 @@
 </div>
 <ul class="nav flex-column">
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('issues.index') }}"> Issues</a>
+        <a class="nav-link" href="{{ route('tasks.index') }}"> Tasks</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('types.index') }}"> Types</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('clients.index') }}">Clients</a>

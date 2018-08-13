@@ -10,6 +10,8 @@ class Client extends Model
         'name', 'address', 'phone_number', 'email',
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
     public function tasks()
     {
         return $this->hasMany(Task::class);

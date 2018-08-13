@@ -12,6 +12,8 @@ class Status extends Model
         'status_name', 'status_description', 'dashboard_color_hex', 'dashboard_order',
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
     public function tasks()
     {
         return $this->hasmany(Task::class);

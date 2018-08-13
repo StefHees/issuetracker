@@ -18,7 +18,7 @@ class CreateStatusesTable extends Migration
             $table->string('status_name');
             $table->string('status_description');
             $table->string('dashboard_color_hex');
-            $table->double('order', 8, 2);
+            $table->double('dashboard_order', 8, 2);
             $table->timestamps();
         });
     }

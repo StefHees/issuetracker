@@ -6,19 +6,39 @@
             {!! \Form::open(['route' => 'tasks.store']) !!}
 
             <div class="form-group">
-                <label for="issue_id">Issue:</label>
-                <select name="issue_id" class="custom-select" id="issue_id" required>
-                    @foreach($issues as $issue)
-                        <option value="{{$issue->id}}">{{$issue->title}}</option>
+                <label for="task_id">Parent Task:</label>
+                <select name="task_id" class="custom-select" id="task_id">
+                    <option >None</option>
+                    @foreach($tasks as $task)
+                        <option value="{{$task->id}}">{{$task->title}}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="issue_id">Status:</label>
+                <label for="status_id">Status:</label>
                 <select name="status_id" class="custom-select" id="status_id" required>
                     @foreach($statuses as $status)
                         <option value="{{$status->id}}">{{$status->status_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="type_id">Type:</label>
+                <select name="type_id" class="custom-select" id="type_id" required>
+                    @foreach($types as $type)
+                        <option value="{{$type->id}}">{{$type->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="type_id">Client:</label>
+                <select name="client_id" class="custom-select" id="client_id">
+                    @foreach($clients as $client)
+                        <option value="{{$client->id}}">{{$client->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -44,8 +64,8 @@
             </div>
 
             <div class="form-group">
-                <label for="example-time-input" class="form-label">Estimated hours:</label>
-                <input name="estimation" class="form-control" type="time" step=900 value="10:00" id="example-time-input" required>
+                <label for="estimation" class="form-label">Estimated hours:</label>
+                <input name="estimation" class="form-control" type="number" value="10" id="estimation" required>
             </div>
 
             <div class="form-group">
