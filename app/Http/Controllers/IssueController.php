@@ -127,7 +127,6 @@ class IssueController extends Controller
      */
     public function destroy(Issue $issue)
     {
-        $issue->users()->detach();
         $issue->delete();
 
         Session::flash('status', 'Issue has been deleted!');
