@@ -7,8 +7,7 @@
             <a class="btn btn-success text-white" href="{{ route('tasks.create') }}"><i class="fas fa-plus"></i> Add Task</a>
 
         </div>
-
-        @foreach($tasks as $task)
+        @foreach($tasks['root'] as $task)
             <div class="m-0" style="border-left:{{ $border = 0 }}px solid #3490dc">
                 <div class="row bg-dark text-white justify-content-between p-0 m-0 p-2">
                     <div><i class="fas fa-angle-right btn"></i></div>
@@ -41,8 +40,9 @@
                     </div>
                 </div>
             </div>
-                @foreach($task->childTasks() as $task)
-                @endforeach
+            @if(true)
+                @include('task.subtask', ['id' => $task->id])
+            @endif
         @endforeach
     </div>
 

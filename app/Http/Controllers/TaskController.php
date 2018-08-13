@@ -19,8 +19,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = Task::all()->where('task_id', '=', null);
-        return view('task.index', ['tasks' => $task]);
+        $tasks = Task::all()->groupBy('task_id');
+        $tasks['root'] = $tasks[''];
+        return view('task.index', ['tasks' => $tasks]);
     }
 
     /**
