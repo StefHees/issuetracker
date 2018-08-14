@@ -28,8 +28,7 @@ class ChangeController extends Controller
         $attributes['password'] = Hash::make($request['password']);
         //dd($attributes);
         if($user->update($attributes) == true) {
-            session()->flash('success', 'Password changed.');
-            //event(new \App\Events\UserModified(User::find($user['id'])));
+            event(new \App\Events\UserModified(User::find($user['id'])));
         } else {
             session()->flash('error', 'Password change failed.');
         };
