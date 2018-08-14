@@ -24,10 +24,15 @@ class CreateTasksTable extends Migration
             $table->integer('estimation');
             $table->boolean('archive')->default(0);
             $table->boolean('on-hold')->default(0);
+            $table->unsignedInteger('task_id')->nullable();
             $table->unsignedInteger('type_id')->nullable();
             $table->unsignedInteger('parent_id')->index()->nullable();
             $table->unsignedInteger('client_id')->nullable();
             $table->unsignedInteger('status_id')->nullable();
+            $table->foreign('task_id')
+                ->references('id')
+                ->on('tasks')
+                ->onDelete('cascade');
             $table->foreign('status_id')
                 ->references('id')
                 ->on('statuses')

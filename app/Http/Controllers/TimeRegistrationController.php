@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TimeRegistrations;
-use App\User;
+use App\Models\User;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;

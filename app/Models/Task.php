@@ -21,7 +21,7 @@ class Task extends Model
 
     public function parent()
     {
-        return $this->belongsTo('App\Models\Task', 'task_id');
+        return $this->belongsTo('App\Models\Task', 'id');
     }
 
     public function children()

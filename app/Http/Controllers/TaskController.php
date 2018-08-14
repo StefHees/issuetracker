@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Models\Status;
 use App\Models\Client;
 use App\Models\Type;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
