@@ -56,9 +56,7 @@ class UserController extends Controller
                 'password' => Hash::make($attributes['password']),
                 'role' => $attributes['role'],
             ])) == true) {
-            session()->flash('success', 'User created successfull.');
-            //event(new \App\Events\UserCreated(User::find($User['id'])));
-            //\Mail::to(auth()->user())->send(new \App\Mail\UserCreated(\App\Models\User::find($user['id'])));
+            event(new \App\Events\UserCreated(User::find($User['id'])));
         } else {
             session()->flash('error', 'User creation failed.');
         };
@@ -116,8 +114,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->get('id'));
 
         if($user->update($attributes) == true) {
-            session()->flash('success', 'User update successfull.');
-           // event(new \App\Events\UserModified(User::find($user['id'])));
+            event(new \App\Events\UserModified(User::find($user['id'])));
         } else {
             session()->flash('error', 'User update failed.');
         };
@@ -139,8 +136,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->get('id'));
 
         if($user->delete() == true) {
-            session()->flash('success', 'User deletion successfull.');
-            //event(new \App\Events\UserDeleted($user));
+            event(new \App\Events\UserDeleted($user));
         } else {
             session()->flash('error', 'User delete failed.');
         };

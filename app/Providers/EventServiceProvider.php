@@ -13,8 +13,29 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'App\Events\IssueCreated' => [
+            'App\Listeners\IssueCreatedSendMail',
+            'App\Listeners\IssueCreatedSendNotification',
+        ],
+        'App\Events\IssueModified' => [
+            'App\Listeners\IssueModifiedSendMail',
+            'App\Listeners\IssueModifiedSendNotification',
+        ],
+        'App\Events\IssueDeleted' => [
+            'App\Listeners\IssueDeletedSendMail',
+            'App\Listeners\IssueDeletedSendNotification',
+        ],
+        'App\Events\UserCreated' => [
+            'App\Listeners\UserCreatedSendMail',
+            'App\Listeners\UserCreatedSendNotification',
+        ],
+        'App\Events\UserModified' => [
+            'App\Listeners\UserModifiedSendMail',
+            'App\Listeners\UserModifiedSendNotification',
+        ],
+        'App\Events\UserDeleted' => [
+            'App\Listeners\UserDeletedSendMail',
+            'App\Listeners\UserDeletedSendNotification',
         ],
     ];
 
