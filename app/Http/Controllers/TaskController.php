@@ -19,8 +19,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all()->groupBy('task_id');
-        $tasks['root'] = $tasks[''];
+        $tasks = Task::whereNull('task_id')->get();
+
         return view('task.index', ['tasks' => $tasks]);
     }
 
@@ -90,8 +90,8 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $statuses = Status::all();
-        $issues = Issue::all();
-        return view('task.edit', ['task' => $task, 'statuses' => $statuses, 'issues' => $issues]);
+        $tasks = Task::all();
+        return view('task.edit', ['task' => $task, 'statuses' => $statuses, 'tasks' => $tasks]);
     }
 
     /**

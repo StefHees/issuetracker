@@ -6,10 +6,14 @@
             {{ Form::model($task, ['route' => ['tasks.update', $task->id]]) }}
 
             <div class="form-group">
-                <label for="issue_id">Issue:</label>
-                <select name="issue_id" class="custom-select" id="issue_id" required>
-                    @foreach($issues as $issue)
-                        <option value="{{$issue->id}}">{{$issue->title}}</option>
+                <label for="task_id">Parent Task:</label>
+                <select name="task_id" class="custom-select" id="task_id">
+                    <option >None</option>
+                    @foreach($tasks as $task2)
+                        <option
+                                @if($task->task_id == $task2->id && $task->task_id)
+                                selected
+                                @endif value="{{$task2->id}}">{{$task2->title}}</option>
                     @endforeach
                 </select>
             </div>
