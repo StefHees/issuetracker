@@ -5,37 +5,26 @@
         <div class="col-md-8 m-auto rounded p-4 bg-gray">
             <h1>Gebruiker wijzigen</h1>
             {!! \Form::model($user, ['route' => 'users.update']) !!}
-            {!! \Form::hidden('id', $user->id) !!}
-            {!! \Form::hidden('password', $user->password) !!}
+                {!! \Form::hidden('id', $user->id) !!}
+                {!! \Form::hidden('password', $user->password) !!}
 
-                <div class="form-group row">
-                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Naam') }}</label>
-
-                    <div class="col-md-6">
-                        {!! \Form::text('name', $user->name, ['class' => 'form-control']) !!}
-                    </div>
+                <div class="form-group]">
+                    {!! Form::label('name', 'Naam:') !!}
+                    {!! \Form::text('name', $user->name, ['class' => 'form-control']) !!}
                 </div>
 
-                <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
-
-                    <div class="col-md-6">
-                        {!! \Form::text('email', $user->email, ['class' => 'form-control']) !!}
-                    </div>
+                <div class="form-group]">
+                    {!! Form::label('email', 'E-Mail:') !!}
+                    {!! \Form::text('email', $user->email, ['class' => 'form-control']) !!}
                 </div>
 
-                <div class="form-group row">
-                    <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
-
-                    <div class="col-md-6">
-                        {!! Form::select('role', ['admin' => 'Admin', 'agent' => 'Agent', 'customer' => 'Customer'], $user->role, ['class' => 'form-control']) !!}
-                    </div>
+                <div class="form-group]">
+                    {!! Form::label('role', 'Rol:') !!}
+                    {!! Form::select('role', ['admin' => 'Admin', 'agent' => 'Agent', 'customer' => 'Customer'], $user->role, ['class' => 'form-control']) !!}
                 </div>
 
-                <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
-                        {!! \Form::submit('Opslaan', ['class' => 'btn btn-small btn-primary']) !!}
-                    </div>
+                <div class="form-group] mb-0">
+                    {!! \Form::submit('Opslaan', ['class' => 'btn btn-small btn-primary']) !!}
                 </div>
             {!! \Form::close() !!}
         </div>
