@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             StatusesTableSeeder::class,
-            //UserTableSeeder::class,
+            UserTableSeeder::class,
         ]);
 
         factory(App\Models\Client::class, 50)->create();
