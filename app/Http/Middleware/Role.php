@@ -10,15 +10,15 @@ class Role
 
     public function handle($request, Closure $next, ... $roles)
     {
-        if (!Auth::check()) // I included this check because you have it, but it really should be part of your 'auth' middleware, most likely added as part of a route group.
+        if (!Auth::check()) // Extra check
             return redirect('login');
 
         $user = Auth::user();
 
-        if (Auth::user()->isAdmin())
+        if (Auth::user()->isAdmin()) // Admin has access to everything
             return $next($request);
 
-        foreach ($roles as $role) {
+        foreach ($roles as $role) { // Check a given role
             // Check if user has the role This check will depend on how your roles are set up
             if (Auth::user()->hasRole(strtolower($role)))
                 return $next($request);

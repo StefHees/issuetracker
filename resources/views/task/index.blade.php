@@ -4,10 +4,12 @@
 
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
+            @if ( auth()->user()->isAdmin() )
             <a class="btn btn-success text-white" href="{{ route('tasks.create') }}"><i class="fas fa-plus"></i> Add Task</a>
-
+            @endif
         </div>
         @foreach($tasks as $task)
+
             <div class="m-0" style="border-left:{{ $border = 0 }}px solid #3490dc">
                 <div class="row bg-dark text-white justify-content-between p-0 m-0 p-2">
                     <div><i class="fas fa-angle-right btn"></i></div>
@@ -42,10 +44,12 @@
             </div>
             @if($task->children->count() > 0)
                 @foreach($task->children as $subtask)
+
                     @include('task.subtask', ['subtask' => $subtask])
                 @endforeach
             @endif
         @endforeach
+
     </div>
 
 @endsection
