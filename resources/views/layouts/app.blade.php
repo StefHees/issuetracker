@@ -32,9 +32,7 @@
             <main id="right-panel">
                 <div class="py-4">
                     <div class="col-10 m-auto">
-                        @if(Session::has('status'))
-                            <p class="alert {{ Session::get('class', 'alert-info') }}">{{ Session::get('status') }}</p>
-                        @endif
+                        @include('etc.messages')
                     </div>
 
                     @yield('content')
