@@ -26,7 +26,7 @@ class Task extends Model
 
     public function children()
     {
-        return $this->hasMany('App\Models\Task', 'task_id');
+        return $this->hasMany('App\Models\Task', 'parent_id');
     }
 
     public function types()

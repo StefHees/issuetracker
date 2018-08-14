@@ -6,11 +6,15 @@
             {!! \Form::open(['route' => 'tasks.store']) !!}
 
             <div class="form-group">
-                <label for="task_id">Parent Task:</label>
-                <select name="task_id" class="custom-select" id="task_id">
-                    <option >None</option>
+                <label for="parent_id">Parent Task:</label>
+                <select name="parent_id" class="custom-select" id="parent_id">
+                    <option >{{$parent_id}}</option>
                     @foreach($tasks as $task)
+                        @if($task->id == $parent_id)
                         <option value="{{$task->id}}">{{$task->title}}</option>
+                        @else
+                        <option value="{{$task->id}}">{{$task->title}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>

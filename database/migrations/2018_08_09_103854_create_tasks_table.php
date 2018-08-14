@@ -29,9 +29,10 @@ class CreateTasksTable extends Migration
             $table->unsignedInteger('parent_id')->index()->nullable();
             $table->unsignedInteger('client_id')->nullable();
             $table->unsignedInteger('status_id')->nullable();
-            $table->foreign('task_id')
+            $table->foreign('parent_id')
                 ->references('id')
                 ->on('tasks')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('status_id')
                 ->references('id')
@@ -58,6 +59,7 @@ class CreateTasksTable extends Migration
             $table->dropForeign('tasks_type_id_foreign');
             $table->dropForeign('tasks_client_id_foreign');
             $table->dropForeign('tasks_status_id_foreign');
+            $table->dropForeign('tasks_parent_id_foreign');
         });
         Schema::dropIfExists('tasks');
     }
