@@ -14,13 +14,10 @@
 
 
 Auth::routes();
-<<<<<<< HEAD
 Route::get('/', 'HomeController@index')->name('home');
-=======
->>>>>>> Development
 
-Route::get('/', 'BoardController@dashboard')->name('board');
-Route::get('/overview', 'BoardController@tree')->name('tree');
+
+Route::get('/dashboard', 'BoardController@dashboard')->name('board');
 
 Route::resources([
     'clients' => 'ClientController',

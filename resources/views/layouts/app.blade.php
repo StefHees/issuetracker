@@ -34,17 +34,9 @@
 
             <main class="col-10">
                 <div class="py-4">
-<<<<<<< HEAD
                     <div class="col-10 m-auto">
                         @include('etc.messages')
                     </div>
-
-                    @yield('content')
-=======
-                    @if(Session::has('status'))
-                        <p class="alert {{ Session::get('class', 'alert-info') }}">{{ Session::get('status') }}</p>
-                    @endif
->>>>>>> Development
                 </div>
                 @yield('content')
             </main>

@@ -5,12 +5,10 @@
             <a class="btn btn-primary text-white m-1" href="{{ route('register') }}">{{ __('Register') }}</a>
         </div>
     @else
-<<<<<<< HEAD
         <h3>{{ Auth::user()->name }}</h3>
         {!! \Form::open(['route' => 'logout']) !!}
         {!! \Form::submit('Uitloggen', ['class' => 'btn btn-primary text-white']) !!}
         {!! \Form::close() !!}
-=======
         <div class="row justify-content-center">
             <img src="{{ Auth::user()->image_path }}" style="width:75px; height:75px; margin:5px;">
         </div>
@@ -19,7 +17,6 @@
         <div class="row justify-content-center">
             <a class="btn btn-primary text-white" href="{{ route('logout') }}">logout</a>
         </div>
->>>>>>> Development
     @endguest
 </div>
 <ul class="nav flex-column">
