@@ -23,8 +23,14 @@
     @endif
     @if ( auth()->user()->isAdminOrAgent() )
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard') }}"> Dashboard</a>
+        </li>
+    @endif
+    @if ( auth()->user()->isAdminOrAgent() )
+
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('tasks.index') }}"> Issues</a>
+        <a class="nav-link" href="{{ route('tasks.index') }}"> Tasks</a>
     </li>
     @endif
     @if ( auth()->user()->isAdminOrAgent() )

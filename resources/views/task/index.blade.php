@@ -10,7 +10,7 @@
         </div>
         @foreach($tasks as $task)
 
-            <div class="m-0" style="border-left:{{ $border = 0 }}px solid #3490dc">
+            <div class="m-0" style="border-left:{{ $border = 0 }}px solid #3490dc; border-top:">
                 <div class="row bg-dark text-white justify-content-between p-0 m-0 p-2">
                     <div><i class="fas fa-angle-right btn"></i></div>
                     <span style="width:20%;">{{$task->title}}</span>

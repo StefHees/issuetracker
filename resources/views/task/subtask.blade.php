@@ -1,5 +1,5 @@
 
-<div class="m-0" style="border-left:{{ $border = 0 }}px solid #3490dc">
+<div class="m-0" style="border-left:{{ $border += 15 }}px solid #003b9b">
     <div class="row bg-dark text-white justify-content-between p-0 m-0 p-2">
         <div><i class="fas fa-angle-right btn"></i></div>
         <span style="width:20%;">{{$subtask->title}}</span>
@@ -33,6 +33,6 @@
 </div>
 @if($subtask->children->count() > 0)
     @foreach($subtask->children as $subsubtask)
-        @include('task.subtask', ['subtask' => $subsubtask])
+        @include('task.subtask', ['subtask' => $subsubtask, 'border' => $border])
     @endforeach
 @endif

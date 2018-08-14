@@ -17,7 +17,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 
-Route::get('/dashboard', 'BoardController@dashboard')->name('board');
+Route::get('/dashboard', 'BoardController@dashboard')->name('dashboard');
 
 Route::resources([
     'clients' => 'ClientController',

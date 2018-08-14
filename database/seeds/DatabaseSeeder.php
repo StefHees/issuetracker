@@ -15,12 +15,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             StatusesTableSeeder::class,
             UserTableSeeder::class,
+
         ]);
 
         factory(App\Models\Client::class, 50)->create();
         $this->call([
             StatusesTableSeeder::class,
             TypeTableSeeder::class,
+            TasksTableSeeder::class,
         ]);
 
     }

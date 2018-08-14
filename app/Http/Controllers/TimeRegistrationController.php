@@ -29,7 +29,7 @@ class TimeRegistrationController extends Controller
     public function create()
     {
         $Users = User::orderBy('name', 'asc')->pluck('name', 'id')->toArray();
-        $Tasks = Task::orderBy('remarks', 'asc')->pluck('remarks', 'id')->toArray();
+        $Tasks = Task::orderBy('id', 'asc')->pluck('title', 'id')->toArray();
         return view('timeRegistration.create', ['Users' => $Users], ['Tasks' => $Tasks]);
     }
 
@@ -75,7 +75,7 @@ class TimeRegistrationController extends Controller
     public function edit(TimeRegistrations $TimeRegistration)
     {
         $Users = User::orderBy('name', 'asc')->pluck('name', 'id')->toArray();
-        $Tasks = Task::orderBy('remarks', 'asc')->pluck('remarks', 'id')->toArray();
+        $Tasks = Task::orderBy('id', 'asc')->pluck('title', 'id')->toArray();
         return view('timeRegistration.edit', ['TimeRegistration' => $TimeRegistration, 'Users' => $Users, 'Tasks' => $Tasks]);
     }
 
