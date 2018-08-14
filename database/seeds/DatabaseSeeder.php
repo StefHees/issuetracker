@@ -11,21 +11,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
+
         $this->call([
             StatusesTableSeeder::class,
-            UserTableSeeder::class,
+            //UserTableSeeder::class,
         ]);
-=======
 
-        factory(App\User::class, 50)->create();
         factory(App\Models\Client::class, 50)->create();
         $this->call([
             StatusesTableSeeder::class,
             TypeTableSeeder::class,
         ]);
 
-
->>>>>>> Development
     }
 }
