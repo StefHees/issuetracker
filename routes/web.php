@@ -35,11 +35,11 @@ Route::resources([
 
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/show/{id}', 'UserController@show')->middleware('role:admin')->name('users.show');
-Route::get('/users/create', 'UserController@create')->name('users.create');
-Route::post('/users/store', 'UserController@store')->name('users.store');
+Route::get('/users/create', 'UserController@create')->middleware('role:admin')->name('users.create');
+Route::post('/users/store', 'UserController@store')->middleware('role:admin')->name('users.store');
 Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 Route::post('/users/update', 'UserController@update')->name('users.update');
-Route::post('/users/destroy', 'UserController@destroy')->name('users.destroy');
+Route::post('/users/destroy', 'UserController@destroy')->middleware('role:admin')->name('users.destroy');
 
-Route::get('/changes/password', 'ChangesController@change_password')->name('changes.password');
-Route::post('/changes/password', 'ChangesController@update_password')->name('changes.update_password');
+Route::get('/change/password', 'ChangeController@change_password')->name('change.password');
+Route::post('/change/password', 'ChangeController@update_password')->name('change.update_password');

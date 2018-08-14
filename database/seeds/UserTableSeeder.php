@@ -8,7 +8,7 @@ class UserTableSeeder extends Seeder {
     public function run()
     {
 
-        $user = \App\Models\Status::where('name', "Admin")->first();
+        $user = \App\Models\User::where('name', "Admin")->first();
 
         if(is_null($user)) {
             User::create(array(
