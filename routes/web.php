@@ -14,17 +14,18 @@
 
 
 Auth::routes();
+<<<<<<< HEAD
 Route::get('/', 'HomeController@index')->name('home');
+=======
+>>>>>>> Development
 
-Route::get('/board', 'BoardController@overview')->name('board');
+Route::get('/', 'BoardController@dashboard')->name('board');
+Route::get('/overview', 'BoardController@tree')->name('tree');
 
 Route::resources([
     'clients' => 'ClientController',
     'tasks' => 'TaskController',
-]);
-
-Route::resources([
-    'issues' => 'IssueController',
+    'types' => 'TypeController',
 ]);
 
 Route::resources([

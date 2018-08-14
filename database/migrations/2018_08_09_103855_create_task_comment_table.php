@@ -34,6 +34,10 @@ class CreateTaskCommentTable extends Migration
      */
     public function down()
     {
+        Schema::table('task_comment', function (Blueprint $table) {
+            $table->dropForeign(['task_id']);
+            $table->dropForeign(['comment_id']);
+        });
         Schema::dropIfExists('task_comment');
     }
 }

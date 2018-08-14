@@ -17,9 +17,14 @@
 
             <div class="form-group">
                 <label for="description">Description:</label>
-                {{ Form::text('description', null, ['class' => 'form-control']) }}
+                {{ Form::textarea('description', null, ['class' => 'form-control']) }}
             </div>
 
+            @if($task->parentTask->client)
+                <p>Client: {{$task->parentTask->client->name}}</p>
+                <input type="hidden" name="client_id" value="{{$task->parentTask->client_id}}">
+
+            @else
             <div class="form-group">
                 <label for="client_id">Client:</label>
                 <select name="client_id" class="custom-select" id="client_id">
@@ -28,9 +33,10 @@
                     @endforeach
                 </select>
             </div>
+            @endif
 
             <div class="form-group">
-                <label for="users[]">Attach users:</label>
+                <label for="users[]">Employees:</label>
                 <select name="users[]" class="custom-select" id="users[]" multiple>
                     @foreach($users as $user)
                         <option value="{{$user->id}}">{{$user->name}}</option>
