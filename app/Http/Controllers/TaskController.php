@@ -41,8 +41,6 @@ class TaskController extends Controller
         $tasks = Task::all();
         $types = Type::all();
         $parent = ['id' => intval($request->id), 'client_id' => 0, 'title' => 'Create parent task.'];
-        $client = 0;
-        $parent_id = intval($request->id);
         if($parent['id']) {
             foreach ($tasks as $task) {
                 if($task->id == $parent['id']) {
@@ -92,7 +90,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('task.edit', ['task' => $task]);
+        return view('task.show', ['task' => $task]);
     }
 
     /**

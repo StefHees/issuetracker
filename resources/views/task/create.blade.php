@@ -16,6 +16,7 @@
                     @foreach($clients as $client)
                         @if($parent['client_id'] == $client->id)
                         <h3>{{$client->id}} {{$client->name}}</h3>
+                        {!! \Form::hidden('client_id', $client->id) !!}
                         @endif
                     @endforeach
                 @else
