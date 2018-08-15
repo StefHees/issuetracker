@@ -1,17 +1,16 @@
 <div class="user-nav">
     @guest
 
-        <div class="p-3 row justify-content-center">
-            <a class="btn btn-primary text-white m-1" href="{{ route('login') }}">{{ __('Login') }}</a>
-        </div>
+    <div class="p-3 row justify-content-center">
+        <a class="btn btn-primary text-white m-1" href="{{ route('login') }}">{{ __('Login') }}</a>
+    </div>
     @else
 
-        <h3>{{ Auth::user()->name }}</h3>
-        {!! \Form::open(['route' => 'logout']) !!}
-        {!! \Form::submit('Uitloggen', ['class' => 'btn btn-primary text-white']) !!}
-        {!! \Form::close() !!}
+    <h3>&nbsp;&nbsp;&nbsp;{{ Auth::user()->name }}</h3>
+    {!! \Form::open(['route' => 'logout']) !!}
+    &nbsp;&nbsp;&nbsp;{!! \Form::submit('Uitloggen', ['class' => 'btn btn-primary text-white']) !!}
+    {!! \Form::close() !!}
     @endguest
-
 </div>
 <ul class="nav flex-column">
 @if (auth()->check())

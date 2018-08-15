@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Models\User;
 
 class UserController extends Controller
@@ -110,8 +112,19 @@ class UserController extends Controller
             'role' => 'required|in:admin,agent,customer', //validate role input
         ]);
 
-        $attributes = $request->all();
         $user = User::findOrFail($request->get('id'));
+        // Handle the user upload of avatar
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            \Image::make($avatar)->resize(300, 300)->save( public_path('/storage/avatars/' . $filename ) );
+            if($user->avatar != 'profile.png') {
+//                Storage::disk('public')->delete(public_path('/storage/avatars/' . $user->avatar));
+                File::delete('storage/avatars/' . $user->avatar );
+            }
+        }
+        $attributes = $request->all();
+        $attributes['avatar'] = $filename;
 
         if($user->update($attributes) == true) {
             event(new \App\Events\UserModified(User::find($user['id'])));

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Gebruikers overzicht</h1>
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
+            <h1 class="text-white">Gebruikers overzicht</h1>
             @if ( auth()->user()->isAdmin() )
 
                 <a class="btn btn-success text-white" href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Nieuwe gebruiker toevoegen</a>
@@ -22,7 +22,8 @@
             @foreach($users as $user)
 
                 <tr>
-                    <th scope="row"><a href="{{ route('users.show', [$user->id]) }}">{{ $user->name }}</a></th>
+
+                    <th scope="row"><a href="{{ route('users.show', [$user->id]) }}"><img src="/storage/avatars/{{ $user->avatar }}" style="width:64px; height:64px;"> {{ $user->name }}</a></th>
                     <td><a href="{{ route('users.show', [$user->id]) }}">{{ $user->email }}</a></td>
                     <td><a href="{{ route('users.show', [$user->id]) }}">{{ $user->role }}</a></td>
                     <td>

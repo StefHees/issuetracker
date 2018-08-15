@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Gebruiker overzicht</h1>
+    <h1>User profile</h1>
     @if ( auth()->user()->isAdmin() )
 
-        <a class="btn btn-success text-white" href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Nieuwe gebruiker toevoegen</a>
+        <a class="btn btn-success text-white" href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Add user</a>
     @endif
     <table class="table">
         <tr>
-            <th>Naam</th>
+            <th>Picture</th>
+            <td><img src="/storage/avatars/{{ $user->avatar }}" style="width:64px; height:64px;"></td>
+        </tr><tr>
+            <th>Name</th>
             <td>{{ $user->name }}</td>
         </tr><tr>
             <th>E-Mail</th>
@@ -17,7 +20,7 @@
             <th>Role</th>
             <td>{{ $user->role }}</td>
         </tr><tr>
-            <th>Opties</th>
+            <th>Options</th>
             <td>
                 <div class="row align-content-between">
                     <a href="{{ route('users.edit', [$user->id]) }}" class="btn btn-sm btn-primary m-1">

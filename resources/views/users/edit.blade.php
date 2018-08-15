@@ -4,12 +4,17 @@
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4 bg-gray">
             <h1>Gebruiker wijzigen</h1>
-            {!! \Form::model($user, ['route' => 'users.update']) !!}
+            {!! \Form::model($user, ['route' => 'users.update', 'enctype' => 'multipart/form-data']) !!}
                 {!! \Form::hidden('id', $user->id) !!}
                 {!! \Form::hidden('password', $user->password) !!}
 
                 <div class="form-group]">
-                    {!! Form::label('name', 'Naam:') !!}
+                    <div><img src="/storage/avatars/{{ $user->avatar }}" style="width:64px; height:64px;"></div>
+                    {!! \Form::file('avatar') !!}
+                </div>
+
+                <div class="form-group]">
+                    {!! Form::label('name', 'Name:') !!}
                     {!! \Form::text('name', $user->name, ['class' => 'form-control']) !!}
                 </div>
 
@@ -19,7 +24,7 @@
                 </div>
 
                 <div class="form-group]">
-                    {!! Form::label('role', 'Rol:') !!}
+                    {!! Form::label('role', 'Role:') !!}
                     {!! Form::select('role', ['admin' => 'Admin', 'agent' => 'Agent', 'customer' => 'Customer'], $user->role, ['class' => 'form-control']) !!}
                 </div>
 
