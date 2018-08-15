@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mt-5">
-        <h2>Type</h2>
+        <h1 class="text-black">Edit Type</h1>
         <div class="col-md-8 m-auto rounded p-4" style="background-color:#f7f7f7;">
             {{ Form::model($type, ['route' => ['types.update', $type], 'method' => 'put']) }}
 
@@ -11,7 +11,7 @@
                 {!! \Form::text('title', null, ['class' => 'form-control']) !!}
             </div>
 
-            {!! \Form::submit('Edit Type', ['class' => 'btn btn-small btn-primary']) !!}
+            {!! \Form::submit('Update', ['class' => 'btn btn-small btn-primary']) !!}
             {!! \Form::close() !!}
         </div>
     </div>

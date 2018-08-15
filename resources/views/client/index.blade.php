@@ -4,9 +4,11 @@
 
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
+            <h1 class="text-white">Clients</h1>
             @if ( auth()->user()->isAdmin() )
-
-            <a class="btn btn-success text-white" href="{{ route('clients.create') }}"><i class="fas fa-plus"></i> Add Client</a>
+                {!! \Form::open(['route' => ['clients.create'], 'method' => 'GET']) !!}
+                {!! \Form::button('<i class="fas fa-plus"></i> Add Client', ['type' => 'submit', 'class' => 'btn btn-success text-white']) !!}
+                {!! \Form::close() !!}
             @endif
 
         </div>

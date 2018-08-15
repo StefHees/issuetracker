@@ -3,20 +3,21 @@
 @section('content')
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
-            <h1 class="text-white">Gebruikers overzicht</h1>
+            <h1 class="text-white">Users</h1>
             @if ( auth()->user()->isAdmin() )
-
-                <a class="btn btn-success text-white" href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Nieuwe gebruiker toevoegen</a>
+                {!! \Form::open(['route' => ['users.create'], 'method' => 'GET']) !!}
+                {!! \Form::button('<i class="fas fa-plus"></i> Add User', ['type' => 'submit', 'class' => 'btn btn-success text-white']) !!}
+                {!! \Form::close() !!}
             @endif
 
         </div>
         <table  class="table table-striped table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Naam</th>
+                    <th scope="col">Name</th>
                     <th scope="col">E-Mail</th>
                     <th scope="col">Role</th>
-                    <th scope="col">Opties</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
             @foreach($users as $user)

@@ -4,7 +4,12 @@
 
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
-            <a class="btn btn-success text-white" href="{{ route('time_registrations.create') }}"><i class="fas fa-plus"></i> Add registration</a>
+            <h1 class="text-white">Time Registrations</h1>
+            @if ( auth()->user()->isAdmin() )
+                {!! \Form::open(['route' => ['time_registrations.create'], 'method' => 'GET']) !!}
+                {!! \Form::button('<i class="fas fa-plus"></i> Add Registration', ['type' => 'submit', 'class' => 'btn btn-success text-white']) !!}
+                {!! \Form::close() !!}
+            @endif
         </div>
         @if($TimeRegistrations !== null)
             <table class="table table-striped table-dark">

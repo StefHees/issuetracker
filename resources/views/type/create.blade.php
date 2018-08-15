@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="mt-5">
-        <h2>Type</h2>
+        <h1 class="text-black">Type</h1>
         <div class="col-md-8 m-auto rounded p-4" style="background-color:#f7f7f7;">
+            <h1 class="text-black">Create Type</h1>
             {!! \Form::open(['route' => 'types.store']) !!}
 
             <div class="form-group">

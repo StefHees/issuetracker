@@ -3,6 +3,7 @@
 @section('content')
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4 bg-gray">
+            <h1 class="text-black">Create Task</h1>
             {!! \Form::open(['route' => 'tasks.store']) !!}
             {!! \Form::hidden('parent_id', $parent['id']) !!}
 

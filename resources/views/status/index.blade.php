@@ -4,9 +4,11 @@
 
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
+            <h1 class="text-white">Statuses</h1>
             @if ( auth()->user()->isAdmin() )
-
-            <a class="btn btn-success text-white" href="{{ route('statuses.create') }}"><i class="fas fa-plus"></i> Add Status</a>
+                {!! \Form::open(['route' => ['statuses.create'], 'method' => 'GET']) !!}
+                {!! \Form::button('<i class="fas fa-plus"></i> Add Status', ['type' => 'submit', 'class' => 'btn btn-success text-white']) !!}
+                {!! \Form::close() !!}
             @endif
 
         </div>

@@ -3,6 +3,7 @@
 @section('content')
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4 bg-gray">
+            <h1 class="text-black">Edit Task</h1>
             {{ Form::model($task, ['route' => ['tasks.update', $task->id]]) }}
 
             <div class="form-group">
@@ -57,7 +58,7 @@
                 {{ Form::selectRange('priority', 1, 10, null, ['class' => 'form-control custom-select']) }}
             </div>
 
-            {!! \Form::submit('Add Task', ['class' => 'btn btn-small btn-primary']) !!}
+            {!! \Form::submit('Update', ['class' => 'btn btn-small btn-primary']) !!}
             {!! \Form::close() !!}
         </div>
     </div>

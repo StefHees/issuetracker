@@ -4,13 +4,11 @@
 
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
+            <h1 class="text-white">Tasks</h1>
             @if ( auth()->user()->isAdmin() )
             {!! \Form::open(['route' => ['tasks.create', 'id' => '0'], 'method' => 'POST']) !!}
             {!! \Form::button('<i class="fas fa-plus"></i> Add Task', ['type' => 'submit', 'class' => 'btn btn-success text-white']) !!}
             {!! \Form::close() !!}
-<!--
-            <a class="btn btn-success text-white" href="{ { route('tasks.create') }}"><i class="fas fa-plus"></i> Add Task</a>
--->
             @endif
         </div>
         @foreach($tasks as $task)
@@ -34,10 +32,6 @@
                         {!! \Form::open(['route' => ['tasks.create', 'id' => $task->id], 'method' => 'POST']) !!}
                         {!! \Form::button('<i class="fas fa-plus"></i>', ['type' => 'submit', 'class' => 'btn btn-sm badge-success']) !!}
                         {!! \Form::close() !!}
-                        <!--
-                        <a href="{ { route('tasks.create', $task->id) }}"  class="btn btn-sm badge-success">
-                            <i class="fas fa-plus"></i>
-                        </a>-->
                     </div>
                     <div>
                         <a href="{{ route('tasks.edit', [$task]) }}"  class="btn btn-sm btn-primary">

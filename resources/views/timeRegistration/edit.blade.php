@@ -3,6 +3,7 @@
 @section('content')
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4" style="background-color:#f7f7f7;">
+            <h1 class="text-black">Edit Time Registration</h1>
             {{ Form::model($TimeRegistration, ['route' => ['time_registrations.update', $TimeRegistration], 'method' => 'put']) }}
 
 
@@ -29,7 +30,7 @@
                 <label for="remarks" class="form-label">Remarks:</label>
                 {!! \Form::text('remarks', null, ['class' => 'form-control']) !!}
             </div>
-            {!! \Form::submit('Edit', ['class' => 'btn btn-small btn-primary']) !!}
+            {!! \Form::submit('Update', ['class' => 'btn btn-small btn-primary']) !!}
             {!! \Form::close() !!}
         </div>
     </div>

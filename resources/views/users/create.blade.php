@@ -3,7 +3,7 @@
 @section('content')
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4 bg-gray">
-            <h1>Gebruiker aanmaken</h1>
+            <h1 class="text-black">Create user</h1>
             {!! \Form::open(['route' => 'users.store']) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'Naam:') !!}

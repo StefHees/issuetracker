@@ -3,6 +3,7 @@
 @section('content')
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4" style="background-color:#f7f7f7;">
+            <h1 class="text-black">Create Time Registration</h1>
             {!! \Form::open(['route' => 'time_registrations.store']) !!}
 
 
