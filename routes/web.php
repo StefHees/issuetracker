@@ -33,6 +33,7 @@ Route::resources([
     'time_registrations' => 'TimeRegistrationController',
 ]);
 
+Route::post('/tasks/create', 'TaskController@create')->middleware('role:admin')->name('tasks.create');
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/show/{id}', 'UserController@show')->middleware('role:admin', 'role:agent')->name('users.show');
 Route::get('/users/create', 'UserController@create')->middleware('role:admin')->name('users.create');

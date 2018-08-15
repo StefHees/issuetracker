@@ -33,14 +33,25 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $statuses = Status::all();
         $clients = Client::all();
         $users = User::all();
         $tasks = Task::all();
         $types = Type::all();
-        return view('task.create', ['statuses' => $statuses, 'clients' => $clients, 'users' => $users, 'tasks' => $tasks, 'types' => $types]);
+        $parent = ['id' => intval($request->id), 'client_id' => 0, 'title' => 'Create parent task.'];
+        $client = 0;
+        $parent_id = intval($request->id);
+        if($parent['id']) {
+            foreach ($tasks as $task) {
+                if($task->id == $parent['id']) {
+                    $parent['title'] = "Creating subtask for ".$task->id." ".$task->title;
+                    $parent['client_id'] = $task->client_id;
+                }
+            }
+        }
+        return view('task.create', ['statuses' => $statuses, 'clients' => $clients, 'users' => $users, 'tasks' => $tasks, 'types' => $types, 'parent' => $parent]);
     }
 
     /**

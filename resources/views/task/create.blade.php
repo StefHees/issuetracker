@@ -4,19 +4,27 @@
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4 bg-gray">
             {!! \Form::open(['route' => 'tasks.store']) !!}
+            {!! \Form::hidden('parent_id', $parent['id']) !!}
 
             <div class="form-group">
-                <label for="parent_id">Parent Task:</label>
-                <select name="parent_id" class="custom-select" id="parent_id">
-                    <option >{{$parent_id}}</option>
-                    @foreach($tasks as $task)
-                        @if($task->id == $parent_id)
-                        <option value="{{$task->id}}">{{$task->title}}</option>
-                        @else
-                        <option value="{{$task->id}}">{{$task->title}}</option>
+                <h3>{{ $parent['title'] }}</h3>
+            </div>
+
+            <div class="form-group">
+                <label for="type_id">Client:</label>
+                @if($parent['client_id'])
+                    @foreach($clients as $client)
+                        @if($parent['client_id'] == $client->id)
+                        <h3>{{$client->id}} {{$client->name}}</h3>
                         @endif
                     @endforeach
+                @else
+                <select name="client_id" class="custom-select" id="client_id">
+                    @foreach($clients as $client)
+                        <option value="{{$client->id}}">{{$client->name}}</option>
+                    @endforeach
                 </select>
+                @endif
             </div>
 
             <div class="form-group">
@@ -33,16 +41,6 @@
                 <select name="type_id" class="custom-select" id="type_id" required>
                     @foreach($types as $type)
                         <option value="{{$type->id}}">{{$type->title}}</option>
-                    @endforeach
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <label for="type_id">Client:</label>
-                <select name="client_id" class="custom-select" id="client_id">
-                    @foreach($clients as $client)
-                        <option value="{{$client->id}}">{{$client->name}}</option>
                     @endforeach
                 </select>
             </div>

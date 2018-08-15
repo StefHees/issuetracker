@@ -5,14 +5,19 @@
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
             @if ( auth()->user()->isAdmin() )
-            <a class="btn btn-success text-white" href="{{ route('tasks.create') }}"><i class="fas fa-plus"></i> Add Task</a>
+            {!! \Form::open(['route' => ['tasks.create', 'id' => '0'], 'method' => 'POST']) !!}
+            {!! \Form::button('<i class="fas fa-plus"></i> Add Task', ['type' => 'submit', 'class' => 'btn btn-success text-white']) !!}
+            {!! \Form::close() !!}
+<!--
+            <a class="btn btn-success text-white" href="{ { route('tasks.create') }}"><i class="fas fa-plus"></i> Add Task</a>
+-->
             @endif
         </div>
         @foreach($tasks as $task)
 
             <div class="m-0" style="border-left:{{ $border = 0 }}px solid #3490dc; border-top:">
                 <div class="row bg-dark text-white justify-content-between p-0 m-0 p-2">
-                    <div><i class="fas fa-angle-right btn"></i></div>
+                    <a href="{{ route('tasks.show', [$task]) }}"><div><i class="fas fa-angle-right btn"></i></div></a>
                     <span style="width:20%;">{{$task->title}}</span>
                     <span style="width:20%;">{{$task->priority}}/10</span>
                     <span style="width:10%;">est. {{$task->estimation}}h</span>
@@ -26,9 +31,13 @@
 
                     <span class="text-white">{{ $task->end_date }}</span>
                     <div>
-                        <a href="{{ route('tasks.create') }}"  class="btn btn-sm badge-success">
+                        {!! \Form::open(['route' => ['tasks.create', 'id' => $task->id], 'method' => 'POST']) !!}
+                        {!! \Form::button('<i class="fas fa-plus"></i>', ['type' => 'submit', 'class' => 'btn btn-sm badge-success']) !!}
+                        {!! \Form::close() !!}
+                        <!--
+                        <a href="{ { route('tasks.create', $task->id) }}"  class="btn btn-sm badge-success">
                             <i class="fas fa-plus"></i>
-                        </a>
+                        </a>-->
                     </div>
                     <div>
                         <a href="{{ route('tasks.edit', [$task]) }}"  class="btn btn-sm btn-primary">
