@@ -17,4 +17,14 @@ class Comment extends Model
         return $this->hasMany(Comment::class,'id','reply_id');
 
     }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\Comment', 'id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany('App\Models\Comment', 'parent_id');
+    }
 }
