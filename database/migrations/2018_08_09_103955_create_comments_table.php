@@ -17,11 +17,15 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->text('text');
-            $table->string('attachment');
+            $table->string('attachment')->nullable();
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('task_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+            $table->foreign('task_id')
+                ->references('id')
+                ->on('tasks');
             $table->unsignedInteger('reply_id')->nullable();
         });
 
@@ -36,6 +40,7 @@ class CreateCommentsTable extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->dropForeign('comments_user_id_foreign');
+            $table->dropForeign('comments_task_id_foreign');
         });
         Schema::dropIfExists('comments');
     }

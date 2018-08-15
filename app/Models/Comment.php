@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['comment', 'attachment', 'reply_id', 'user_id'];
+    protected $fillable = ['comment', 'attachment', 'parent_id', 'user_id, task_id'];
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -18,6 +18,11 @@ class Comment extends Model
 
     }
 
+    public function task()
+    {
+        return $this->belongsTo(Task::class);
+    }
+
     public function parent()
     {
         return $this->belongsTo('App\Models\Comment', 'id');
@@ -26,5 +31,9 @@ class Comment extends Model
     public function children()
     {
         return $this->hasMany('App\Models\Comment', 'parent_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
