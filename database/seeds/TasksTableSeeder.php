@@ -33,7 +33,7 @@ class TasksTableSeeder extends Seeder
             'status_id' => 1,
             'type_id' => 1,
             'client_id' => 1,
-            'task_id' => 1,
+            'parent_id' => 1,
         ]);
 
         Task::create([
@@ -46,7 +46,7 @@ class TasksTableSeeder extends Seeder
             'status_id' => 1,
             'type_id' => 1,
             'client_id' => 1,
-            'task_id' => 2,
+            'parent_id' => 2,
         ]);
 
         Task::create([
@@ -59,7 +59,7 @@ class TasksTableSeeder extends Seeder
             'status_id' => 1,
             'type_id' => 1,
             'client_id' => 1,
-            'task_id' => 2,
+            'parent_id' => 2,
         ]);
 
         Task::create([
@@ -72,7 +72,7 @@ class TasksTableSeeder extends Seeder
             'status_id' => 1,
             'type_id' => 1,
             'client_id' => 1,
-            'task_id' => 4,
+            'parent_id' => 4,
         ]);
 
         Task::create([
@@ -85,7 +85,7 @@ class TasksTableSeeder extends Seeder
             'status_id' => 1,
             'type_id' => 1,
             'client_id' => 1,
-            'task_id' => 4,
+            'parent_id' => 4,
         ]);
 
         Task::create([
