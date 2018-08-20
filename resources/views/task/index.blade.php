@@ -39,6 +39,11 @@
                         </a>
                     </div>
                     <div>
+                        <a href="{{ route('tasks.show', [$task]) }}"  class="btn btn-sm btn-primary">
+                            <i class="fas fa-file-alt"></i>
+                        </a>
+                    </div>
+                    <div>
                         {!! \Form::open(['route' => ['tasks.destroy', $task], 'method' => 'delete']) !!}
                         {!! \Form::button('<i class="fas fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger']) !!}
                         {!! \Form::close() !!}
