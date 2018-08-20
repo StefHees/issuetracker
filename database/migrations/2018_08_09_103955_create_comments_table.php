@@ -27,6 +27,7 @@ class CreateCommentsTable extends Migration
                 ->references('id')
                 ->on('tasks');
             $table->unsignedInteger('reply_id')->nullable();
+            $table->timestamps();
         });
 
     }
