@@ -23,6 +23,7 @@ Route::resources([
     'clients' => 'ClientController',
     'tasks' => 'TaskController',
     'types' => 'TypeController',
+    'comments' => 'CommentController'
 ]);
 
 Route::resources([
@@ -44,3 +45,6 @@ Route::post('/users/destroy', 'UserController@destroy')->middleware('role:admin'
 
 Route::get('/change/password', 'ChangeController@change_password')->name('change.password');
 Route::post('/change/password', 'ChangeController@update_password')->name('change.update_password');
+
+
+Route::post('/comments/store', 'CommentController@create')->middleware('role:admin')->name('comments.create');

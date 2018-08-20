@@ -17,16 +17,33 @@
     @if($task->comments)
         @foreach($task->comments as $comment)
             <div class="card">
+                {{-- TV: doesn't seem right: if a comment has a pernt display it?? No you want the data of the parent but thats not available at tis passing of the loop--}}
+                {{--@if($comment->parent)--}}
+                    {{--<div class="card-header"><h2>{{$comment->user->name}} {{$comment->created_at}}</h2></div>--}}
+                    {{--<div class="card-body">--}}
+                        {{--<p class="card-text">{{$comment->text}}</p>--}}
+                    {{--</div>--}}
+                {{--@endif--}}
+                {{--@if($comment->children)--}}
+                    {{--@foreach($comment->children as $comment)--}}
+                        {{--@include('task.comment', ['comment' => $comment])--}}
+                    {{--@endforeach--}}
+                {{--@endif--}}
+
+
                 <div class="card-header"><h2>{{$comment->user->name}} {{$comment->created_at}}</h2></div>
                 <div class="card-body">
                     <p class="card-text">{{$comment->text}}</p>
                 </div>
-                @if($comment->children)
-                    @foreach($comment->children as $comment)
-                        @include('task.comment', ['comment' => $comment])
-                    @endforeach
-                @endif
+
+
+                @include('task.comment_form', ['parentId' =>$comment->parent_id])
+
             </div>
         @endforeach
+
+        <h3>Leave a reply</h3>
+        @include('task.comment_form')
+
     @endif
 @endsection
