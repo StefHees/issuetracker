@@ -5,7 +5,7 @@
     <div class="m-auto col-10 mt-5">
         <div class="navbar navbar-dark bg-dark">
             <h1 class="text-white">Time Registrations</h1>
-            @if ( auth()->user()->isAdmin() )
+            @if ( auth()->user()->isAdminOrAgent() )
                 {!! \Form::open(['route' => ['time_registrations.create'], 'method' => 'GET']) !!}
                 {!! \Form::button('<i class="fas fa-plus"></i> Add Registration', ['type' => 'submit', 'class' => 'btn btn-success text-white']) !!}
                 {!! \Form::close() !!}

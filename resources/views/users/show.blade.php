@@ -26,10 +26,12 @@
                     <a href="{{ route('users.edit', [$user->id]) }}" class="btn btn-sm btn-primary m-1">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
+                    @if ( auth()->user()->isAdmin() )
                     {!! \Form::open(['route' => 'users.destroy']) !!}
                     {!! \Form::button('<i class="fas fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger m-1']) !!}
                     {!! \Form::hidden('id', $user->id) !!}
                     {!! \Form::close() !!}
+                    @endif
                 </div>
             </td>
         </tr>

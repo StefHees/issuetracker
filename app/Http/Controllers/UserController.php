@@ -122,6 +122,8 @@ class UserController extends Controller
 //                Storage::disk('public')->delete(public_path('/storage/avatars/' . $user->avatar));
                 File::delete('storage/avatars/' . $user->avatar );
             }
+        } else {
+            $filename = $user->avatar;
         }
         $attributes = $request->all();
         $attributes['avatar'] = $filename;
@@ -131,7 +133,7 @@ class UserController extends Controller
         } else {
             session()->flash('error', 'User update failed.');
         };
-        return redirect()->route('users.index');
+        return redirect()->route('users.show', ['id' => $request->get('id')]);
     }
 
     /**
@@ -147,6 +149,9 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($request->get('id'));
+        if($user->avatar != 'profile.png') {
+            File::delete('storage/avatars/' . $user->avatar );
+        }
 
         if($user->delete() == true) {
             event(new \App\Events\UserDeleted($user));

@@ -19,6 +19,11 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('users.index') }}">Users</a>
     </li>
+    @else
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('users.show', ['id' => auth()->user()->id]) }}">My profile</a>
+    </li>
     @endif
     @if ( auth()->user()->isAdminOrAgent() )
 
