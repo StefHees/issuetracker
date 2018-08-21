@@ -48,6 +48,7 @@ class TimeRegistrationController extends Controller
         ]);
 
         $attributes = $request->all();
+        $attributes['time_in_minutes'] = round($attributes['time_in_minutes']/15,0)*15;
 
         TimeRegistrations::create($attributes);
         Session::flash('status', 'Registration was successfully added!');
@@ -95,7 +96,7 @@ class TimeRegistrationController extends Controller
         ]);
 
         $attributes = $request->all();
-
+        $attributes['time_in_minutes'] = round($attributes['time_in_minutes']/15,0)*15;
         $TimeRegistration->update($attributes);
         Session::flash('status', $TimeRegistration->remarks.' has been editted!');
         Session::flash('class', 'alert-success');
