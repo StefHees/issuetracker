@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Models\User;
 
@@ -43,13 +42,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:admin,agent,customer', //validate role input
-        ]);
-
+        $this->validate($request, $this->rules($request));
         $attributes = $request->all();
 
         if(($User = User::create([
@@ -73,12 +66,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-
-        $data = [
-            'user' => $user,
-        ];
-        return view('users/show')->with($data);
+        return view('users/show')->with([ 'user' => User::findOrFail($id) ]);
     }
 
     /**
@@ -89,12 +77,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-
-        $data = [
-            'user' => $user,
-        ];
-        return view('users/edit')->with($data);
+        return view('users/edit')->with([ 'user' => User::findOrFail($id) ]);
     }
 
     /**
@@ -105,12 +88,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$request->get('id'),
-//            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:admin,agent,customer', //validate role input
-        ]);
+        $this->validate($request, $this->rules($request));
 
         $user = User::findOrFail($request->get('id'));
         // Handle the user upload of avatar
@@ -119,7 +97,6 @@ class UserController extends Controller
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             \Image::make($avatar)->resize(300, 300)->save( public_path('/storage/avatars/' . $filename ) );
             if($user->avatar != 'profile.png') {
-//                Storage::disk('public')->delete(public_path('/storage/avatars/' . $user->avatar));
                 File::delete('storage/avatars/' . $user->avatar );
             }
         } else {
@@ -142,7 +119,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function delete(Request $request)
     {
         $this->validate($request, [
             'id' => 'required',
@@ -159,5 +136,42 @@ class UserController extends Controller
             session()->flash('error', 'User delete failed.');
         };
         return redirect()->route('users.index');
+    }
+
+    public function method(Request $request) {
+        return $request->getMethod();
+    }
+
+    public function rules(Request $request)
+    {
+        switch($this->method($request))
+        {
+            case 'GET':
+            case 'DELETE':
+                {
+                    return [
+                        'id' => 'required',
+                    ];
+                }
+            case 'POST':
+                {
+                    return [
+                        'name' => 'required|string|max:255',
+                        'email' => 'required|string|email|max:255|unique:users,email,'.$request->get('id'),
+                        'role' => 'required|in:admin,agent,customer', //validate role input
+                    ];
+                }
+            case 'PUT':
+            case 'PATCH':
+                {
+                    return [
+                        'name' => 'required|string|max:255',
+                        'email' => 'required|string|email|max:255|unique:users',
+                        'password' => 'required|string|min:6|confirmed',
+                        'role' => 'required|in:admin,agent,customer', //validate role input
+                    ];
+                }
+            default:break;
+        }
     }
 }

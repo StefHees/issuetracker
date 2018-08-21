@@ -13,7 +13,7 @@
                 <label for="user_id">User:</label>
                 {{--{!! Form::select('size', $Users, \Auth::user()) !!}--}}
                 {!! Form::select('user_id', $Users, Auth::id(),['class' => 'form-control']) !!}
-           </div>
+            </div>
 
             <div class="form-group">
                 <label for="task_id">Task:</label>
@@ -21,9 +21,9 @@
                 {!! Form::select('task_id', $Tasks, null, ['class' => 'form-control']) !!}
             </div>
 
-           <div class="form-group">
-               <label for="time_in_minutes">Time (in minutes, round by 15 min.):</label>
-               {!! \Form::text('time_in_minutes', null, ['class' => 'form-control']) !!}
+            <div class="form-group">
+                <label for="time_in_minutes">Time (in minutes, round by 15 min.):</label>
+                {!! \Form::text('time_in_minutes', null, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">

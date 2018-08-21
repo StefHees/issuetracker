@@ -65,6 +65,4 @@ class User extends Authenticatable
         $this->hasMany(Comment::class);
     }
 
-
-
 }

@@ -14,19 +14,11 @@ class ChangeController extends Controller
     }
 
     public function update_password(Request $request) {
-        //dd($request);
-        //$this->validate($request, $this->rules($user->id));
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$request->get('id'),
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:admin,agent,customer', //validate role input
-        ]);
-
+        $this->validate($request, $this->rules($request));
         $user = User::findOrFail($request->get('id'));
+
         $attributes = $request->all();
         $attributes['password'] = Hash::make($request['password']);
-        //dd($attributes);
         if($user->update($attributes) == true) {
             event(new \App\Events\UserModified(User::find($user['id'])));
         } else {
@@ -35,34 +27,37 @@ class ChangeController extends Controller
         return redirect()->route('users.edit', $request->get('id'));
     }
 
-    public function rules($id)
+    public function method(Request $request) {
+        return $request->getMethod();
+    }
+
+    public function rules(Request $request)
     {
-        switch($this->method())
+        switch($this->method($request))
         {
             case 'GET':
             case 'DELETE':
                 {
                     return [
-                        'id'    =>  'required',
+                        'id' => 'required',
                     ];
                 }
             case 'POST':
                 {
                     return [
-                        'user.name'         => 'required|string|max:255',
-                        'user.email'        => 'required|string|email|max:255|unique:users|',
-                        'user.password'     => 'required|string|min:6|confirmed',
-                        'user.role'         => 'required|in:admin,agent,customer', //validate role input
+                        'name' => 'required|string|max:255',
+                        'email' => 'required|string|email|max:255|unique:users,email,'.$request->get('id'),
+                        'role' => 'required|in:admin,agent,customer', //validate role input
                     ];
                 }
             case 'PUT':
             case 'PATCH':
                 {
                     return [
-                        'user.name'         => 'required|string|max:255',
-                        'user.email'        => 'required|string|email|max:255|unique:users,email,'.$id,
-                        'user.password'     => 'required|string|min:6|confirmed',
-                        'user.role'         => 'required|in:admin,agent,customer', //validate role input
+                        'name' => 'required|string|max:255',
+                        'email' => 'required|string|email|max:255|unique:users',
+                        'password' => 'required|string|min:6|confirmed',
+                        'role' => 'required|in:admin,agent,customer', //validate role input
                     ];
                 }
             default:break;

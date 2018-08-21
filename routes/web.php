@@ -41,7 +41,7 @@ Route::get('/users/create', 'UserController@create')->middleware('role:admin')->
 Route::post('/users/store', 'UserController@store')->middleware('role:admin')->name('users.store');
 Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 Route::post('/users/update', 'UserController@update')->name('users.update');
-Route::post('/users/destroy', 'UserController@destroy')->middleware('role:admin')->name('users.destroy');
+Route::post('/users/delete', 'UserController@delete')->middleware('role:admin')->name('users.delete');
 
 Route::get('/change/password', 'ChangeController@change_password')->name('change.password');
 Route::post('/change/password', 'ChangeController@update_password')->name('change.update_password');
