@@ -4,7 +4,7 @@
     <div class="mt-5">
         <div class="col-md-8 m-auto rounded p-4 bg-gray">
             <h1>Edit user</h1>
-            {!! \Form::model($user, ['route' => 'users.update', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($user, ['route' => ['users.update', $user], 'enctype' => 'multipart/form-data', 'method' => 'put']) !!}
                 {!! \Form::hidden('id', $user->id) !!}
                 {!! \Form::hidden('password', $user->password) !!}
 
@@ -25,7 +25,14 @@
 
                 <div class="form-group]">
                     {!! Form::label('role', 'Role:') !!}
+                    @if(auth()->user()->isAdmin())
+
                     {!! Form::select('role', ['admin' => 'Admin', 'agent' => 'Agent', 'customer' => 'Customer'], $user->role, ['class' => 'form-control']) !!}
+                    @else
+
+                    {!! Form::select('role', ['admin' => 'Admin', 'agent' => 'Agent', 'customer' => 'Customer'], $user->role, ['disabled', 'class' => 'form-control']) !!}
+                    @endif
+
                 </div>
 
                 <div class="form-group] mb-0">

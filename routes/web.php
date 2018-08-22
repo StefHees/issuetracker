@@ -40,11 +40,11 @@ Route::get('/users/show/{id}', 'UserController@show')->middleware('role:agent')-
 Route::get('/users/create', 'UserController@create')->middleware('role:admin')->name('users.create');
 Route::post('/users/store', 'UserController@store')->middleware('role:admin')->name('users.store');
 Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
-Route::post('/users/update', 'UserController@update')->name('users.update');
-Route::post('/users/delete', 'UserController@delete')->middleware('role:admin')->name('users.delete');
+Route::put('/users/update', 'UserController@update')->name('users.update');
+Route::delete('/users/destroy', 'UserController@destroy')->middleware('role:admin')->name('users.destroy');
 
-Route::get('/change/password', 'ChangeController@change_password')->name('change.password');
-Route::post('/change/password', 'ChangeController@update_password')->name('change.update_password');
+Route::get('/users/password/{id}', 'ChangeController@change_password')->name('users.password');
+Route::patch('/users/password/{id}', 'ChangeController@update_password')->name('users.update_password');
 
 
 Route::post('/comments/store', 'CommentController@create')->middleware('role:admin')->name('comments.create');

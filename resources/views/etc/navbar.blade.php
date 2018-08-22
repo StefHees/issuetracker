@@ -55,12 +55,6 @@
         <a class="nav-link" href="{{ route('time_registrations.index') }}">Time registrations</a>
     </li>
     @endif
-    @if ( auth()->user()->isAdminOrAgent() )
-
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('change.password') }}">Wachtwoord</a>
-    </li>
-    @endif
 @endif
 
 </ul>

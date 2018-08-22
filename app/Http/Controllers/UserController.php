@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Models\User;
+use App\Models\Request;
 
 class UserController extends Controller
 {
@@ -42,7 +43,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules($request));
+        $this->validate($request, $request->userRules());
         $attributes = $request->all();
 
         if(($User = User::create([
@@ -66,7 +67,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('users/show')->with([ 'user' => User::findOrFail($id) ]);
+        if(auth()->user()->isAdmin() || auth()->user()->id == $id) {
+            $user = User::findOrFail($id);
+            return view('users/show')->with([ 'user' => User::findOrFail($id) ]);
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -77,7 +83,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users/edit')->with([ 'user' => User::findOrFail($id) ]);
+        if(auth()->user()->isAdmin() || auth()->user()->id == $id) {
+            $user = User::findOrFail($id);
+            return view('users/edit')->with([ 'user' => User::findOrFail($id) ]);
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -88,29 +99,33 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, $this->rules($request));
+        if(auth()->user()->isAdmin() || auth()->user()->id == $request->get('id')) {
+            $this->validate($request, $request->userRules());
 
-        $user = User::findOrFail($request->get('id'));
-        // Handle the user upload of avatar
-        if($request->hasFile('avatar')){
-            $avatar = $request->file('avatar');
-            $filename = time() . '.' . $avatar->getClientOriginalExtension();
-            \Image::make($avatar)->resize(300, 300)->save( public_path('/storage/avatars/' . $filename ) );
-            if($user->avatar != 'profile.png') {
-                File::delete('storage/avatars/' . $user->avatar );
+            $user = User::findOrFail($request->get('id'));
+            // Handle the user upload of avatar
+            if($request->hasFile('avatar')){
+                $avatar = $request->file('avatar');
+                $filename = time() . '.' . $avatar->getClientOriginalExtension();
+                \Image::make($avatar)->resize(300, 300)->save( public_path('/storage/avatars/' . $filename ) );
+                if($user->avatar != 'profile.png') {
+                    File::delete('storage/avatars/' . $user->avatar );
+                }
+            } else {
+                $filename = $user->avatar;
             }
-        } else {
-            $filename = $user->avatar;
-        }
-        $attributes = $request->all();
-        $attributes['avatar'] = $filename;
+            $attributes = $request->all();
+            $attributes['avatar'] = $filename;
 
-        if($user->update($attributes) == true) {
-            event(new \App\Events\UserModified(User::find($user['id'])));
+            if($user->update($attributes) == true) {
+                event(new \App\Events\UserModified(User::find($user['id'])));
+            } else {
+                session()->flash('error', 'User update failed.');
+            };
+            return redirect()->route('users.show', ['id' => $request->get('id')]);
         } else {
-            session()->flash('error', 'User update failed.');
-        };
-        return redirect()->route('users.show', ['id' => $request->get('id')]);
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -119,59 +134,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
-        $this->validate($request, [
-            'id' => 'required',
-        ]);
+        if(auth()->user()->isAdmin() || auth()->user()->id == $request->get('id')) {
+            $this->validate($request, $request->userRules());
 
-        $user = User::findOrFail($request->get('id'));
-        if($user->avatar != 'profile.png') {
-            File::delete('storage/avatars/' . $user->avatar );
-        }
+            $user = User::findOrFail($request->get('id'));
+            if($user->avatar != 'profile.png') {
+                File::delete('storage/avatars/' . $user->avatar );
+            }
 
-        if($user->delete() == true) {
-            event(new \App\Events\UserDeleted($user));
+            if($user->delete() == true) {
+                event(new \App\Events\UserDeleted($user));
+            } else {
+                session()->flash('error', 'User delete failed.');
+            };
+            return redirect()->route('users.index');
         } else {
-            session()->flash('error', 'User delete failed.');
-        };
-        return redirect()->route('users.index');
-    }
-
-    public function method(Request $request) {
-        return $request->getMethod();
-    }
-
-    public function rules(Request $request)
-    {
-        switch($this->method($request))
-        {
-            case 'GET':
-            case 'DELETE':
-                {
-                    return [
-                        'id' => 'required',
-                    ];
-                }
-            case 'POST':
-                {
-                    return [
-                        'name' => 'required|string|max:255',
-                        'email' => 'required|string|email|max:255|unique:users,email,'.$request->get('id'),
-                        'role' => 'required|in:admin,agent,customer', //validate role input
-                    ];
-                }
-            case 'PUT':
-            case 'PATCH':
-                {
-                    return [
-                        'name' => 'required|string|max:255',
-                        'email' => 'required|string|email|max:255|unique:users',
-                        'password' => 'required|string|min:6|confirmed',
-                        'role' => 'required|in:admin,agent,customer', //validate role input
-                    ];
-                }
-            default:break;
+            return redirect()->route('home');
         }
     }
 }

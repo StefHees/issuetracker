@@ -33,7 +33,7 @@
                             <i class="fas fa-pencil-alt"></i>
                         </a>
                         @if ( auth()->user()->isAdmin() && $user->id!=1 )
-                        {!! \Form::open(['route' => 'users.delete']) !!}
+                        {!! \Form::open(['route' => ['users.destroy', $user], 'method' => 'delete']) !!}
                         {!! \Form::button('<i class="fas fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger m-1']) !!}
                         {!! \Form::hidden('id', $user->id) !!}
                         {!! \Form::close() !!}
