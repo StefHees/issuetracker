@@ -106,10 +106,12 @@ class UserController extends Controller
             // Handle the user upload of avatar
             if($request->hasFile('avatar')){
                 $avatar = $request->file('avatar');
-                $filename = time() . '.' . $avatar->getClientOriginalExtension();
-                \Image::make($avatar)->resize(300, 300)->save( public_path('/storage/avatars/' . $filename ) );
+                $filename = uniqid('', true) . '.' . $avatar->getClientOriginalExtension();
+
+                \Image::make($avatar)->save(storage_path('app/avatars/' . $filename ));
+
                 if($user->avatar != 'profile.png') {
-                    File::delete('storage/avatars/' . $user->avatar );
+                    File::delete(storage_path('app/avatars/' . $user->avatar));
                 }
             } else {
                 $filename = $user->avatar;

@@ -48,3 +48,6 @@ Route::patch('/users/password/{id}', 'ChangeController@update_password')->name('
 
 
 Route::post('/comments/store', 'CommentController@create')->middleware('role:admin')->name('comments.create');
+
+
+Route::get('/avatar/{filename}', 'AvatarController@show')->name('avatar.show');

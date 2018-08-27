@@ -24,7 +24,7 @@
 
                 <tr>
 
-                    <th scope="row"><a href="{{ route('users.show', [$user->id]) }}"><img src="/storage/avatars/{{ $user->avatar }}" style="width:64px; height:64px;"> {{ $user->name }}</a></th>
+                    <th scope="row"><a href="{{ route('users.show', [$user->id]) }}"><img src="{{ route('avatar.show', [$user->avatar]) }}" style="width:64px; height:64px;"> {{ $user->name }}</a></th>
                     <td><a href="{{ route('users.show', [$user->id]) }}">{{ $user->email }}</a></td>
                     <td><a href="{{ route('users.show', [$user->id]) }}">{{ $user->role }}</a></td>
                     <td>
