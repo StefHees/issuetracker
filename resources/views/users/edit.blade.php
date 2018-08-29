@@ -9,8 +9,13 @@
                 {!! \Form::hidden('password', $user->password) !!}
 
                 <div class="form-group]">
-                    <div><img src="/storage/avatars/{{ $user->avatar }}" style="width:64px; height:64px;"></div>
-                    {!! \Form::file('avatar') !!}
+                    <div><img src="{{ route('avatar.show', [$user->avatar]) }}" style="width:64px; height:64px;"></div>
+                    {!! Form::label('avatar', 'Avatar:', ['class' => 'cabinet']) !!}
+                    <label class="cabinet">
+                        <input type="file" class="file" id="avatar" name="avatar">
+                    <!--{ !! \Form::file('avatar', ['class' => 'file']) !!}
+                    -->
+                    </label>
                 </div>
 
                 <div class="form-group]">
@@ -21,6 +26,15 @@
                 <div class="form-group]">
                     {!! Form::label('email', 'E-Mail:') !!}
                     {!! \Form::text('email', $user->email, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group]">
+                    {!! Form::label('hourly_rate', 'Hourly Rate &euro;:') !!}
+                    @if(auth()->user()->isAdmin())
+
+                        {!! \Form::text('hourly_rate', ($user->hourly_rate)/100, ['class' => 'form-control']) !!}
+                    @endif
+
                 </div>
 
                 <div class="form-group]">

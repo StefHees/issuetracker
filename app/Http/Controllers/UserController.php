@@ -51,6 +51,7 @@ class UserController extends Controller
                 'email' => $attributes['email'],
                 'password' => Hash::make($attributes['password']),
                 'role' => $attributes['role'],
+                'hourly_rate' => $attributes['hourly_rate']*100,
             ])) == true) {
             event(new \App\Events\UserCreated(User::find($User['id'])));
         } else {
@@ -118,6 +119,7 @@ class UserController extends Controller
             }
             $attributes = $request->all();
             $attributes['avatar'] = $filename;
+            $attributes['hourly_rate'] = $attributes['hourly_rate']*100;
 
             if($user->update($attributes) == true) {
                 event(new \App\Events\UserModified(User::find($user['id'])));

@@ -9,7 +9,7 @@
     <table class="table">
         <tr>
             <th>Picture</th>
-            <td><img src="/storage/avatars/{{ $user->avatar }}" style="width:64px; height:64px;"></td>
+            <td><img src="{{ route('avatar.show', [$user->avatar]) }}" style="width:64px; height:64px;"></td>
         </tr><tr>
             <th>Name</th>
             <td>{{ $user->name }}</td>
@@ -19,6 +19,9 @@
         </tr><tr>
             <th>Role</th>
             <td>{{ $user->role }}</td>
+        </tr><tr>
+            <th>Hourly Rate</th>
+            <td>&euro; {{ number_format(($user->hourly_rate)/100, 2, ',', '.') }}</td>
         </tr><tr>
             <th>Options</th>
             <td>
